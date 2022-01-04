@@ -26,10 +26,18 @@ describe("MerkleDistributor", function () {
     const leaf = elements[3];
     const proof = merkleTree.getHexProof(leaf);
 
-    // Deploy contract
+    // Deploy contracts
     const Distributor = await ethers.getContractFactory("MerkleDistributor");
-    const distributor = await Distributor.deploy(root);
+    const NftContract = await ethers.getContractFactory("NftContract");
+
+    const nftcontract = await NftContract.deploy();
+    await nftcontract.deployed()
+
+    const distributor = await Distributor.deploy(root, nftcontract.address);
     await distributor.deployed();
+
+    //set distributor on nftcontract 
+    await nftcontract.setDistributor(distributor.address);
 
     // Attempt to claim and verify success
     await expect(distributor.claim(users[3].address, users[3].amount, proof))
@@ -45,10 +53,18 @@ describe("MerkleDistributor", function () {
     const leaf = elements[3];
     const proof = merkleTree.getHexProof(leaf);
 
-    // Deploy contract
+    // Deploy contracts
     const Distributor = await ethers.getContractFactory("MerkleDistributor");
-    const distributor = await Distributor.deploy(root);
+    const NftContract = await ethers.getContractFactory("NftContract");
+
+    const nftcontract = await NftContract.deploy();
+    await nftcontract.deployed()
+
+    const distributor = await Distributor.deploy(root, nftcontract.address);
     await distributor.deployed();
+
+    //set distributor on nftcontract 
+    await nftcontract.setDistributor(distributor.address);
 
     // random amount
     await expect(
@@ -70,10 +86,18 @@ describe("MerkleDistributor", function () {
 
     const root = merkleTree.getHexRoot();
 
-    // Deploy contract
+    // Deploy contracts
     const Distributor = await ethers.getContractFactory("MerkleDistributor");
-    const distributor = await Distributor.deploy(root);
+    const NftContract = await ethers.getContractFactory("NftContract");
+
+    const nftcontract = await NftContract.deploy();
+    await nftcontract.deployed()
+
+    const distributor = await Distributor.deploy(root, nftcontract.address);
     await distributor.deployed();
+
+    //set distributor on nftcontract 
+    await nftcontract.setDistributor(distributor.address);
 
     // Attempt to claim and verify success
     await expect(

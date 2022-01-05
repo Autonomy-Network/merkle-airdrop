@@ -1,3 +1,7 @@
+# Repos that could come in handy: https://github.com/Autonomy-Network/generate-merkle-data, https://github.com/Autonomy-Network/generateHolders
+
+
+
 # Advanced Sample Hardhat Project
 
 This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.

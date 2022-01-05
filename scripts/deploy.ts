@@ -18,7 +18,8 @@ async function main() {
 
   // We get the contract to deploy
   // Deploy contracts
-
+  
+  //this is the airdrop user data 
   const users = [
     { address: "0xD08c8e6d78a1f64B1796d6DC3137B19665cb6F1F", tokenID: 10 },
     { address: "0xb7D15753D3F76e7C892B63db6b4729f700C01298", tokenID: 15 },
@@ -33,9 +34,11 @@ async function main() {
 
   const merkleTree = new MerkleTree(elements, keccak256, { sort: true });
 
+  //get hex root of data 
   const root = merkleTree.getHexRoot();
 
 
+  //deploy contracts 
   const Distributor = await ethers.getContractFactory("MerkleDistributor");
   const NftContract = await ethers.getContractFactory("NftContract");
 

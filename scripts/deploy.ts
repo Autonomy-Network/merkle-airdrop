@@ -20,15 +20,15 @@ async function main() {
   // Deploy contracts
 
   const users = [
-    { address: "0xD08c8e6d78a1f64B1796d6DC3137B19665cb6F1F", amount: 10 },
-    { address: "0xb7D15753D3F76e7C892B63db6b4729f700C01298", amount: 15 },
-    { address: "0xf69Ca530Cd4849e3d1329FBEC06787a96a3f9A68", amount: 20 },
-    { address: "0xa8532aAa27E9f7c3a96d754674c99F1E2f824800", amount: 30 },
+    { address: "0xD08c8e6d78a1f64B1796d6DC3137B19665cb6F1F", tokenID: 10 },
+    { address: "0xb7D15753D3F76e7C892B63db6b4729f700C01298", tokenID: 15 },
+    { address: "0xf69Ca530Cd4849e3d1329FBEC06787a96a3f9A68", tokenID: 20 },
+    { address: "0xa8532aAa27E9f7c3a96d754674c99F1E2f824800", tokenID: 30 },
   ];
 
-  // equal to MerkleDistributor.sol #keccak256(abi.encodePacked(account, amount));
+  // equal to MerkleDistributor.sol #keccak256(abi.encodePacked(account, tokenID));
   const elements = users.map((x) =>
-    utils.solidityKeccak256(["address", "uint256"], [x.address, x.amount])
+    utils.solidityKeccak256(["address", "uint256"], [x.address, x.tokenID])
   );
 
   const merkleTree = new MerkleTree(elements, keccak256, { sort: true });

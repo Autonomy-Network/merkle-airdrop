@@ -4,6 +4,9 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 import { ethers } from "hardhat";
+import { utils } from "ethers";
+import { MerkleTree } from "merkletreejs";
+import keccak256 from "keccak256";
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -14,12 +17,39 @@ async function main() {
   // await hre.run('compile');
 
   // We get the contract to deploy
-  const Greeter = await ethers.getContractFactory("Greeter");
-  const greeter = await Greeter.deploy("Hello, Hardhat!");
+  // Deploy contracts
 
-  await greeter.deployed();
+  const users = [
+    { address: "0xD08c8e6d78a1f64B1796d6DC3137B19665cb6F1F", amount: 10 },
+    { address: "0xb7D15753D3F76e7C892B63db6b4729f700C01298", amount: 15 },
+    { address: "0xf69Ca530Cd4849e3d1329FBEC06787a96a3f9A68", amount: 20 },
+    { address: "0xa8532aAa27E9f7c3a96d754674c99F1E2f824800", amount: 30 },
+  ];
 
-  console.log("Greeter deployed to:", greeter.address);
+  // equal to MerkleDistributor.sol #keccak256(abi.encodePacked(account, amount));
+  const elements = users.map((x) =>
+    utils.solidityKeccak256(["address", "uint256"], [x.address, x.amount])
+  );
+
+  const merkleTree = new MerkleTree(elements, keccak256, { sort: true });
+
+  const root = merkleTree.getHexRoot();
+
+
+  const Distributor = await ethers.getContractFactory("MerkleDistributor");
+  const NftContract = await ethers.getContractFactory("NftContract");
+
+  const nftcontract = await NftContract.deploy();
+  await nftcontract.deployed()
+
+  const distributor = await Distributor.deploy(root, nftcontract.address);
+  await distributor.deployed();
+
+  //set distributor on nftcontract 
+  await nftcontract.setDistributor(distributor.address);
+
+  console.log("nftcontract deployed to", nftcontract.address);
+  console.log("distributor deployed to", distributor.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

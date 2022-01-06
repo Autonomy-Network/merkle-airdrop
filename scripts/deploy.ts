@@ -21,10 +21,9 @@ async function main() {
   
   //this is the airdrop user data 
   const users = [
-    { address: "0xD08c8e6d78a1f64B1796d6DC3137B19665cb6F1F", tokenID: 10 },
-    { address: "0xb7D15753D3F76e7C892B63db6b4729f700C01298", tokenID: 15 },
-    { address: "0xf69Ca530Cd4849e3d1329FBEC06787a96a3f9A68", tokenID: 20 },
-    { address: "0xa8532aAa27E9f7c3a96d754674c99F1E2f824800", tokenID: 30 },
+    { address: "0xaCfC1540F8aF26fFaA13bc3a9618f2224140627B", tokenID: 10 },
+    { address: "0xB34a506b91C5bd1265d0550e9Aa6B6eD5bcc3a39", tokenID: 15 },
+    { address: "0xF7b40bC5A93Dcbfa5EeBD84231D2C8EC0af1B037", tokenID: 20 },
   ];
 
   // equal to MerkleDistributor.sol #keccak256(abi.encodePacked(account, tokenID));

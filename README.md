@@ -1,4 +1,4 @@
-# Repos that could come in handy: https://github.com/Autonomy-Network/generate-merkle-data, https://github.com/Autonomy-Network/generateHolders
+# Repos that could come in handy: https://github.com/Autonomy-Network/generate-merkle-data, https://github.com/Autonomy-Network/generateHolders, https://github.com/Autonomy-Network/demo-merkle-drop-ui
 
 
 

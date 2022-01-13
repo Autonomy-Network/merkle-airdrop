@@ -18,7 +18,7 @@ async function main() {
 
   // We get the contract to deploy
   // Deploy contracts
-  
+
   //this is the airdrop user data 
   const users = [
     { address: "0xaCfC1540F8aF26fFaA13bc3a9618f2224140627B", tokenID: 10 },
@@ -52,6 +52,27 @@ async function main() {
 
   console.log("nftcontract deployed to", nftcontract.address);
   console.log("distributor deployed to", distributor.address);
+
+
+  // // Attempt to claim and verify success
+
+  // const leaf0 = elements[0];
+  // const proof0 = merkleTree.getHexProof(leaf0);
+
+  // const leaf1 = elements[1];
+  // const proof1 = merkleTree.getHexProof(leaf1);
+
+  // const leaf2 = elements[2];
+  // const proof2 = merkleTree.getHexProof(leaf2);
+
+
+
+  // await distributor.claim(users[0].address, users[0].tokenID, proof0,{"gasLimit":"500000"})
+  // console.log('claimed to ', users[0].address)
+  // await distributor.claim(users[1].address, users[1].tokenID, proof1,{"gasLimit":"500000"})
+  // console.log('claimed to ', users[1].address)
+  // await distributor.claim(users[2].address, users[2].tokenID, proof2,{"gasLimit":"500000"})
+  // console.log('claimed to ', users[2].address)
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract NftContract is ERC721, Ownable {
     address public MerkleDistributor;
+    string baseURI;
 
     constructor() ERC721("NftContract", "NFT") {}
 
@@ -20,5 +21,21 @@ contract NftContract is ERC721, Ownable {
 
     function safeMint(address to, uint256 tokenId) public onlyDistributor {
         _safeMint(to, tokenId);
+    }
+
+    function _baseURI() internal view override returns (string memory) {
+        return baseURI;
+    }
+
+    function setBaseURI(string memory _baseTokenUri) public onlyOwner {
+        _setBaseURI(_baseTokenUri);
+    }
+
+    function _setBaseURI(string memory _baseTokenUri) internal {
+        baseURI = _baseTokenUri;
+    }
+
+    function baseTokenURI() public view returns (string memory) {
+        return _baseURI();
     }
 }

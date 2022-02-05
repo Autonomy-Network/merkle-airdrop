@@ -1,6 +1,7 @@
 # Repos that could come in handy: https://github.com/Autonomy-Network/generate-merkle-data, https://github.com/Autonomy-Network/generateHolders, https://github.com/Autonomy-Network/demo-merkle-drop-ui
 
 
+dont forget to set the env variables in the hardhat.config.js before running script.ts!
 
 # Advanced Sample Hardhat Project
 

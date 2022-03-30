@@ -86,7 +86,7 @@ async function main() {
 
   // equal to MerkleDistributor.sol #keccak256(abi.encodePacked(account, tokenID));
   const elements = users.map((x) =>
-    utils.solidityKeccak256(["address", "uint256"], [x.address, x.tokenID])
+    utils.solidityKeccak256(["address", "uint256", "amount"], [x.address, x.tokenID, x.amount])
   );
 
   const merkleTree = new MerkleTree(elements, keccak256, { sort: true });
@@ -120,7 +120,7 @@ async function main() {
      const leaf = elements[index];
      const proof = merkleTree.getHexProof(leaf);
 
-     await distributor.claim(users[index].address, users[index].tokenID, users[index].amount, '0xccf4d2682cee3e6228904274225c040673be1f986e0954a6d963fb472ab20a9c', proof, { "gasLimit": "500000" })
+     await distributor.claim(users[index].address, users[index].tokenID, users[index].amount, [], proof, { "gasLimit": "500000" })
      console.log('claimed to ', users[index].address)
    }
 
